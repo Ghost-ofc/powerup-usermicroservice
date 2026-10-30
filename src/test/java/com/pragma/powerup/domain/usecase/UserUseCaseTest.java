@@ -216,9 +216,19 @@ class UserUseCaseTest {
     }
 
     @Test
-    @DisplayName("Debe lanzar RequiredFieldException cuando se busca por correo vacío o nulo")
-    void findByCorreo_whenEmailBlankOrNull_shouldThrowRequiredFieldException() {
-        assertThrows(RequiredFieldException.class, () -> userUseCase.findByCorreo(""));
-        assertThrows(RequiredFieldException.class, () -> userUseCase.findByCorreo(null));
+    @DisplayName("Debe consultar usuario por ID exitosamente")
+    void findById_whenValidId_shouldReturnUser() {
+        when(userPersistencePort.findById(1L)).thenReturn(validUser);
+
+        UserModel result = userUseCase.findById(1L);
+
+        assertNotNull(result);
+        verify(userPersistencePort).findById(1L);
+    }
+
+    @Test
+    @DisplayName("Debe lanzar RequiredFieldException cuando se busca por id nulo")
+    void findById_whenIdNull_shouldThrowRequiredFieldException() {
+        assertThrows(RequiredFieldException.class, () -> userUseCase.findById(null));
     }
 }

@@ -64,6 +64,14 @@ public class UserUseCase implements IUserServicePort {
         return userPersistencePort.findByCorreo(correo);
     }
 
+    @Override
+    public UserModel findById(Long id) {
+        if (id == null) {
+            throw new RequiredFieldException("id");
+        }
+        return userPersistencePort.findById(id);
+    }
+
     private void validateRequiredFields(UserModel userModel) {
         if (userModel == null) {
             throw new RequiredFieldException("user");

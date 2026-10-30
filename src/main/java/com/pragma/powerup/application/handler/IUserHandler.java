@@ -6,4 +6,5 @@ import com.pragma.powerup.application.dto.response.UserResponseDto;
 public interface IUserHandler {
     void saveOwner(UserRequestDto userRequestDto);
     UserResponseDto getByCorreo(String correo);
+    UserResponseDto getById(Long id);
 }

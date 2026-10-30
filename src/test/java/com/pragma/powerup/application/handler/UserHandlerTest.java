@@ -78,4 +78,28 @@ class UserHandlerTest {
         verify(userServicePort).findByCorreo("carlos@correo.com");
         verify(userResponseMapper).toResponse(userModel);
     }
+
+    @Test
+    @DisplayName("Debe consultar por id y mapear a response DTO")
+    void getById_shouldFindAndMapToResponseDto() {
+        UserModel userModel = new UserModel(
+                1L, "Carlos", "Gómez", "12345", "+573001234567",
+                LocalDate.of(1995, 5, 20), "carlos@correo.com", "hashed",
+                new RoleModel(2L, "ROLE_PROPIETARIO", "Propietario")
+        );
+        UserResponseDto responseDto = new UserResponseDto(
+                1L, "Carlos", "Gómez", "12345", "+573001234567",
+                LocalDate.of(1995, 5, 20), "carlos@correo.com", "ROLE_PROPIETARIO"
+        );
+
+        when(userServicePort.findById(1L)).thenReturn(userModel);
+        when(userResponseMapper.toResponse(userModel)).thenReturn(responseDto);
+
+        UserResponseDto result = userHandler.getById(1L);
+
+        assertNotNull(result);
+        assertEquals(1L, result.getId());
+        verify(userServicePort).findById(1L);
+        verify(userResponseMapper).toResponse(userModel);
+    }
 }

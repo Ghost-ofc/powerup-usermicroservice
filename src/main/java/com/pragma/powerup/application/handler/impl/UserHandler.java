@@ -31,4 +31,10 @@ public class UserHandler implements IUserHandler {
         UserModel userModel = userServicePort.findByCorreo(correo);
         return userResponseMapper.toResponse(userModel);
     }
+
+    @Override
+    public UserResponseDto getById(Long id) {
+        UserModel userModel = userServicePort.findById(id);
+        return userResponseMapper.toResponse(userModel);
+    }
 }
