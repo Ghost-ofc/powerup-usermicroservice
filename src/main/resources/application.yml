@@ -6,10 +6,14 @@ spring:
     url: jdbc:mysql://localhost:3306/powerup
     username: root
     password: 1234
-
   jpa:
     hibernate:
       ddl-auto: update
     show-sql: true
-appDescription: "Pragma Powerup"
-appVersion: "1.0.0"
+
+jwt:
+  secret: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
+  expiration: 86400000
+
+appdescription: "Microservicio de Usuarios - Pragma PowerUp"
+appversion: "1.0.0"
